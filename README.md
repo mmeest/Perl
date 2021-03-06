@@ -52,9 +52,9 @@ print "Hello World\n";
 And run the code
 
 ## Text formating
- \\ - escapecharacter
- \\n - new line
- q - replace single quote '
+ \\ - escapecharacter\
+ \\n - new line\
+ q - replace single quote '\
  qq - replace double quote "
 
 ## Datatypes
