@@ -74,6 +74,11 @@ my ($age, $street) = (40, '123 Main St');
 2. Arrays
 3. Hashes
 
+## String operations
+```
+
+```
+
 ## Math
 say "5 + 4 = ", 5 + 4;\
 say "5 - 4 = ", 5 - 4;\
@@ -107,6 +112,132 @@ say "--6 = ", --$rand_num;
 
 say "3 + 2 * 5 = ", 3 + 2 * 5;\
 say "(3 + 2) * 5 = ", (3 + 2) * 5;
+
+## Conditionals
+**Conditional logic symbols**\
+== - equal\
+!= - not equal\
+< - less than\
+> - greater than\
+<= - less than or equal to\
+>= - greater than or equal to
+
+**Strings comparsion operators**\
+eq - equal to\
+ne - not equal to\
+lt - less than\
+le - les thann or equal to\
+gt - greater than\
+ge - greater than or equal to
+
+**Boolean operations**\
+! - not\
+&& - and\
+|| - or
+
+if, elsif, else\
+unless - opposite of if\
+Example of if conditions:
+```
+my $age = 80;
+my $is_not_intoxicated = 1;
+my $age_last_exam = 16;
+
+if($age < 16){
+	say "You can't drive";
+} elsif(!$is_not_intoxicated){
+	say "You can't drive";
+} else {
+	say "You can drive";
+}
+```
+
+Example 2:
+```
+my $age = 80;
+my $is_not_intoxicated = 1;
+my $age_last_exam = 16;
+
+if(($age >= 1) && ($age < 16)){
+	say "Yout can't drive";
+} elsif(!$is_not_intoxicated){
+	say "You can't drive";
+} elsif(($age >= 80) && (($age > 100) || (($age - $age_last_exam) > 5))){
+	say "You can't drive";
+} else {
+	say "You can drive";
+}
+```
+
+String comparsion:
+```
+if('a' eq 'b'){
+	say "a equals b";
+} else {
+	say "a doesn't equal b";
+}
+```
+
+## Loops
+for loop:
+```
+for(my $i = 0; $i < 10; $i++){
+	say $i;
+}
+```
+
+next - skip back to beginning of loop('continue' in other languages)\
+last - break out of loop('break' in other languages)\
+while loop:
+```
+my $i = 1;
+
+while($i < 10){
+	if($i %2 == 0){
+		$i++;				
+		next;
+	}
+	if($i == 7){last;}
+	say $i;
+	$i++;
+}
+```
+
+<STDIN> - input from user\
+do while loop:
+ 
+```
+my $i = 1;
+
+my $lucky_num = 7;
+
+my $guess;
+
+do {
+	say "Guess a Number Between 1 and 10";
+	
+	$guess = <STDIN>;
+} while $guess != $lucky_num;
+
+say "You Guessed 7";
+```
+
+## Switch statement
+```
+my $i = 1;
+
+my $age_old = 18;
+
+given($age_old){
+	when($_ > 16){
+		say "Drive";
+		continue;
+	}
+	when($_ > 17){say "Go Vote";}
+	default {say "Nothing Special";}
+}
+```
+
 
 
 
