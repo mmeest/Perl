@@ -64,11 +64,11 @@ And run the code
 my $name = 'Derek';
 my ($age, $street) = (40, '123 Main St');
 ```
-%C - Character
-%s - string
-%d - Decimal
-%u - Unsigned integer
-%f - Floating Point (Decimal Notation)
+%C - Character\
+%s - string\
+%d - Decimal\
+%u - Unsigned integer\
+%f - Floating Point (Decimal Notation)\
 %e - Floating Point (Scientific Notation)
 
 2. Arrays
