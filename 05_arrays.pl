@@ -85,6 +85,6 @@ my @number_array = (1,2,3,4,5,6,7,8);
 my @odds_array = grep {$_ % 2} @number_array;
 print join(", ", @odds_array), "\n";
 
-# map - 
+# map - go thru all elements
 my @dbl_array = map {$_ * 2} @number_array;
 print join(", ", @dbl_array), "\n";
