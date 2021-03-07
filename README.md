@@ -50,7 +50,7 @@ Perl's legacy is regular expression or 'regex'. Perl is still used on some serve
 * Wikipedia - https://en.wikipedia.org/wiki/Perl
 
 
-<image src="padre.png"> ** Padre **
+<image src="padre.png"> *Padre*
 ## Installation
 1. Download latest version of Strawberry Perl from https://strawberryperl.com/
 2. Or ActivePerl with Padre-editor from http://padre.perlide.org/download.html
