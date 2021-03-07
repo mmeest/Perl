@@ -23,9 +23,9 @@
 - [About Perl](#about-perl)
 - [Links](#links)
 - [Installation](#installation)
-- [Hello World!](#hello-world!)
+- [Hello World](#hello-world)
 - [Text formating](#text-formating)
-- [Data types](#data-types)
+- [Datatypes](#datatypes)
 - [String operations](#string-operations)
 - [Math](#math)
 - [Conditionals](#conditionals)
@@ -64,7 +64,7 @@ setx path "%path%;C:\Strawberry\perl\bin"
 perl -v
 ```
 
-## Hello World!
+## Hello World
 Type on Windows terminal:
 ```
 perl -e "'print" "Hello World \n'"
