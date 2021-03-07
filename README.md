@@ -1,5 +1,5 @@
 <p align="center">
-  <image src="perl.png" width="450px" style="border-radius:50%">
+  <image src="perl.png" width="450px">
 </p>
 	
 <h1 align="center">
@@ -19,6 +19,24 @@
 </h3>
 <br><br>
 
+## Table of contents
+- [About Perl](#about-perl)
+- [Links](#links)
+- [Installation](#installation)
+- [Hello World!](#hello-world!)
+- [Text formating](#text-formating)
+- [Data types](#data-types)
+- [String operations](#string-operations)
+- [Math](#math)
+- [Conditionals](#conditionals)
+- [Loops](#loops)
+- [Switch statement](#switch-statement)
+- [Arrays](#arrays)
+- [Hashes](#hashes)
+- [Subroutines](#subroutines)
+- [File IO](#file-io)
+- [Object oriented Perl](#object-oriented-perl)
+
 ## About Perl
 Perl's legacy is regular expression or 'regex'. Perl is still used on some servers to automate processes. The problem that perl has it had many variants. Initially it was made very flexible so you could do things with many different ways. So finally noone could read what the code was supposed to do. It was compact but not very readable code.
 
@@ -31,6 +49,8 @@ Perl's legacy is regular expression or 'regex'. Perl is still used on some serve
 * Srawberry Perl - https://strawberryperl.com/
 * Wikipedia - https://en.wikipedia.org/wiki/Perl
 
+
+<image src="padre.png"> ** Padre **
 ## Installation
 1. Download latest version of Strawberry Perl from https://strawberryperl.com/
 2. Or ActivePerl with Padre-editor from http://padre.perlide.org/download.html
@@ -423,7 +443,234 @@ my @dbl_array = map {$_ * 2} @number_array;
 print join(", ", @dbl_array), "\n";
 ```
 
+## Hashes
+Hashes use keys to access values
 
+```
+# insert into hash
+$employees{Frank} = 44;
 
+while (my ($k, $v)=each %employees){print "$k $v\n"}
 
+# slice from hash
+my @ages = @employees{"Sue", "Sam"};
+say @ages;
 
+# convert hash into array
+my @hash_array = %employees;
+
+# delete key and value
+delete $employees{'Frank'};
+
+while (my ($k, $v)=each %employees){print "$k $v\n"}
+
+# to check if value exists in hash
+say ((exists $employees{'Sam'}) ? "Sam is here" : "No Sam");
+
+# cycle thru keys
+for my $key (keys %employees){
+	if($employees{$key} == 35){
+		say "Hi Sue";
+	}
+}
+```
+
+## Subroutines
+Subroutines are functions that allow to call a block of code
+```
+# defining subroutine
+sub get_random {
+	return int(rand 11);
+}
+
+say "Random Number ", get_random();
+
+# arguments
+sub get_random_max {
+	my ($max_num) = @_;			# $max_num - passed argument value
+	
+	$max_num ||= 11;			# 11 - default value
+	return int(rand $max_num);
+}
+say "Random Number ", get_random_max(100);	# 100 - argument for function
+
+# recieve multiple values
+sub get_sum{
+	my ($num_1, $num_2) = @_;
+	
+	$num_1 ||= 1;
+	$num_2 ||= 1;
+	
+	return $num_1 + $num_2;
+}
+
+# to recieve unknown number of values
+sub sum_many {
+	my $sum = 0;
+	foreach my $val (@_){
+		$sum += $val;
+	}
+	return $sum;
+}
+
+say "Sum : ", sum_many(1,2,3,4,5);
+
+# variable in function with state
+sub increment {
+	state $execute_total = 0;
+	$execute_total++;
+	say "Executed $execute_total times";
+}
+
+increment();
+increment();
+
+# return multiple values
+sub double_array {
+	my @num_array = @_;
+	$_ *= 2 for @num_array;
+	return @num_array;
+}
+
+my @rand_array = (1,2,3,4,5);
+
+print join(", ", double_array(@rand_array)),"\n";
+
+# return single variables
+sub get_mults{
+	my ($rand_num) = @_;
+	return $rand_num * 2, $rand_num * 3;
+}
+
+my ($dbl_num, $trip_num) = get_mults(3);
+
+say "$dbl_num $trip_num";
+
+# recursive subroutines
+sub factorial {
+	my ($num) = @_;
+	return 0 if $num <= 0;
+	return 1 if $num == 1;
+	return $num * factorial($num - 1);
+}
+
+say "Factorial 4 = ", factorial(4);
+```
+
+## File IO
+Working with files
+```
+# read a file
+my $emp_file = 'employees.txt';
+
+open my $fh, '<', $emp_file			# fh - file handler, < - read only
+	or die "Can't Open File : $_";
+	
+while(my $info = <$fh>){
+	chomp($info);
+	
+	my ($emp_name, $job, $id) = split /:/, $info;
+	
+	print "$emp_name is a $job and has the id $id \n";
+}
+	
+close $fh or die "Couldn't Close File : $_";	# close the file
+
+# open file for appending data
+open $fh, '>>', $emp_file			# >> - append
+	or die "Can't Open File : $_";
+	
+print $fh "John:Carpenter:126\n";
+close $fh or die "Couldn't Close File : $_";	# close the file
+
+# read and write from file
+open $fh, '+<', $emp_file			# +< - 
+	or die "Can't Open File : $_";
+	
+seek $fh, 0, 0;					# go to the beginning of file
+
+print $fh "Phil:Salesman:125\n";
+close $fh or die "Couldn't Close File : $_";	# close the file
+```
+
+## Object oriented Perl
+In Perl class corresponds to a package that is self contained unit of variables and subroutines
+
+package 'Cat'
+```
+package Animal::Cat;					# package name
+
+use strict;
+use warnings;
+
+sub new{						# constructor
+	my $class = shift;				# passed arguments
+	my $self = {					# reference to actual object
+		name => shift,
+		owner => shift
+	};
+	bless $self, $class;				# returning a reference
+	return $self;					# return finished object to be used
+}
+
+sub getName {
+	my ($self) = @_;
+	return $self->{name};				# return the value of name
+}
+
+sub setName {
+	my ($self, $name) = @_;
+	$self->{name} = $name if defined($name);	# setting the value for name
+	return $self->{name};				# return the value of name
+}
+
+sub getSound {
+	my ($self) = @_;
+	return $self->{name}, " says meow";		# return the sound value of name
+}
+
+1;							# ending package (1 - return TRUE)
+```
+
+package 'Lion'
+```
+package Animal::Lion;
+
+use Animal::Cat;
+use strict;
+
+our @ISA = qw(Animal::Cat);			# inherit all variables from 'Cat'
+
+sub getSound {					# override method
+	my ($self) = @_;
+	return $self->{name}, " says Rowrrr";
+}
+```
+
+creating instances of a class
+```
+# to use folders
+use lib 'lib';
+
+# reference to use package Animal::Cat
+use Animal::Cat;
+
+# creating Cat object
+my $whiskers = new Animal::Cat("whiskers", "Derek");
+
+# calling a subroutine and getting object's name
+say $whiskers->getName();
+
+# setting object's name
+$whiskers->setName("Whiskers");
+
+say $whiskers->getName();
+
+say $whiskers->getSound();
+
+use Animal::Lion;
+
+use $king = new Animal::Lion("King", "No Owner");
+
+say $king->getSound();
+```
